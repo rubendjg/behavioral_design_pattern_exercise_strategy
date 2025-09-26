@@ -52,11 +52,19 @@ python -m presentation.cli --items '[{"sku":"A","qty":2,"unit_price":10.0},{"sku
 # Should output: Total: 29.00
 ```
 
-### Testing
+## Setup
 
-Uncomment the test cases in `tests/` directory once your implementation is complete:
 ```bash
-python -m pytest tests/
+# 1) Create a virtual environment (optional)
+# Unix
+python -m venv .venv && source .venv/bin/activate
+
+# Windows: 
+python -m venv .venv
+.venv\Scripts\activate
+
+# 2) Install test dependency
+pip install -r requirements.txt
 ```
 
 ## Tests
@@ -64,6 +72,5 @@ python -m pytest tests/
 Install pytest and run:
 
 ```bash
-pip install pytest
-pytest -q strategy_app/tests
+pytest tests
 ```
