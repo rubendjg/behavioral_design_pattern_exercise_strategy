@@ -9,7 +9,6 @@ def parse_items(items_json: str) -> list[LineItem]:
     items = [LineItem(**obj) for obj in raw]
     return items
 
-
 def main() -> None:
     parser = argparse.ArgumentParser(description="Pricing CLI (Strategy Pattern)")
     parser.add_argument("--items", type=str, required=True,
@@ -26,14 +25,19 @@ def main() -> None:
 
     items = parse_items(args.items)
     subtotal = compute_subtotal(items)
+    values = vars(args)
     
+
     # TODO: Get the appropriate strategy using choose_strategy function
+    strategy = choose_strategy(values['strategy'], **values)
     # TODO: Apply the strategy to calculate the final total
+    final_price = strategy.apply(subtotal, items)
     # TODO: Display the results (subtotal, strategy used, and final total)
-    
     print(f"Subtotal: {subtotal:.2f}")
-    print(f"Strategy: {args.strategy}")
+    print(f"Strategy: {values['strategy']}")
+    print(f"Total: {final_price:.2f}")
     # TODO: Calculate and print the final total
+    return final_price
 
 
 if __name__ == "__main__":
